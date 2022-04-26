@@ -63,13 +63,9 @@ $("#submitBtn").click( (e) => {
 
     let formData = { amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by }
     
-    console.log( formData )
-
-    return
-
     $.ajax({
         url: 'http://hacheck.tel.fer.hr/xml.pl',
-        data: data,
+        data: formData,
         processData: false,
         type: 'POST',
         success: function ( data ) {
