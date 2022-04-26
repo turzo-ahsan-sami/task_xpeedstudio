@@ -1,15 +1,15 @@
 <?php
 
 abstract class Model{
-	protected $dbh;
-	protected $stmt;
+	protected $dbHandle;
+	protected $preparedStatement;
 
 	public function __construct(){
-		$this->dbh = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);	
+		$this->dbHandle = new PDO(DB_DNS, DB_USER, DB_PASS);	
 	}
 
 	public function query($query){
-		$this->stmt = $this->dbh->prepare($query);
+		$this->preparedStatement = $this->dbHandle->prepare($query);
 	}
 
 	public function bind($param, $value, $type = null){
@@ -28,29 +28,29 @@ abstract class Model{
 					$type = PDO::PARAM_STR;
 			}
 		}
-		$this->stmt->bindValue($param, $value, $type);
+		$this->preparedStatement->bindValue($param, $value, $type);
 	}
 
 	public function execute(){
-		$this->stmt->execute();
+		$this->preparedStatement->execute();
 	}
 
 	public function resultSet(){
 		$this->execute();
-		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $this->preparedStatement->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function single(){
 		$this->execute();
-		return $this->stmt->fetch(PDO::FETCH_ASSOC);
+		return $this->preparedStatement->fetch(PDO::FETCH_ASSOC);
 	}
 	public function countSet(){
 		$this->execute();
-		return $this->stmt->fetchColumn();
+		return $this->preparedStatement->fetchColumn();
 	}
 
 	public function lastInsertId(){
-		return $this->dbh->lastInsertId();
+		return $this->dbHandle->lastInsertId();
 	}
 }
 

@@ -17,7 +17,7 @@
 				<input type="password" name="password" class="form-control" id="password" required />
 			</div>
 			<input class="btn btn-primary" name="submit" type="submit" value="Submit" />
-			<a class="btn btn-danger" href="<?php echo ROOT_PATH; ?>shares">Cancel</a>
+			<a class="btn btn-danger" href="<?php echo ROOT_PATH; ?>">Cancel</a>
 		</form>
  	</div>
 </div>

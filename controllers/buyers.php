@@ -2,7 +2,7 @@
 
 class Shares extends Controller{
 	protected function Index(){
-		$viewmodel = new ShareModel();
+		$viewmodel = new BuyerModel();
 		$this->returnView($viewmodel->Index(), true);
 	}
 
@@ -10,7 +10,7 @@ class Shares extends Controller{
 		if(!isset($_SESSION['is_logged_in'])){
 			header('Location: ' . ROOT_PATH . 'shares');
 		} else {
-			$viewmodel = new ShareModel();
+			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->add(), true);
 		}
 	}
@@ -19,7 +19,7 @@ class Shares extends Controller{
 		if(!isset($_SESSION['is_logged_in'])){
 			header('Location: ' . ROOT_PATH . 'shares');
 		} else {
-			$viewmodel = new ShareModel();
+			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->edit(), true);
 		}
 	}
@@ -28,7 +28,7 @@ class Shares extends Controller{
 		if(!isset($_SESSION['is_logged_in'])){
 			header('Location: ' . ROOT_PATH . 'shares');
 		} else {
-			$viewmodel = new ShareModel();
+			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->delete(), true);
 		}
 	}
