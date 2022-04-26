@@ -63,7 +63,3 @@
 		</form>
 	</div>
 </div>
-
-<?php echo $_SERVER['PHP_SELF']; ?>
-
-<?php echo ROOT_PATH . 'buyers/add-new' ?>

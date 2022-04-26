@@ -6,9 +6,7 @@ class Bootstrap{
 	private $request;
 
 	public function __construct($request){
-
-		// print_r($request);
-
+		
 		$this->request = $request;
 
 		if($this->request['controller'] == ''){
