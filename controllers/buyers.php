@@ -1,6 +1,6 @@
 <?php
 
-class Shares extends Controller{
+class Buyers extends Controller{
 	protected function Index(){
 		$viewmodel = new BuyerModel();
 		$this->returnView($viewmodel->Index(), true);
@@ -8,7 +8,7 @@ class Shares extends Controller{
 
 	protected function add(){
 		if(!isset($_SESSION['is_logged_in'])){
-			header('Location: ' . ROOT_PATH . 'shares');
+			header('Location: ' . ROOT_PATH . 'buyers');
 		} else {
 			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->add(), true);
@@ -17,7 +17,7 @@ class Shares extends Controller{
 
 	protected function edit(){
 		if(!isset($_SESSION['is_logged_in'])){
-			header('Location: ' . ROOT_PATH . 'shares');
+			header('Location: ' . ROOT_PATH . 'buyers');
 		} else {
 			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->edit(), true);
@@ -26,7 +26,7 @@ class Shares extends Controller{
 
 	protected function delete(){
 		if(!isset($_SESSION['is_logged_in'])){
-			header('Location: ' . ROOT_PATH . 'shares');
+			header('Location: ' . ROOT_PATH . 'buyers');
 		} else {
 			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->delete(), true);

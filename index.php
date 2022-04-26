@@ -11,11 +11,11 @@
     require('classes/model.php');
 
     require('controllers/home.php');
-    require('controllers/shares.php');
+    require('controllers/buyers.php');
     require('controllers/users.php');
 
     require('models/home.php');
-    require('models/share.php');
+    require('models/buyer.php');
     require('models/user.php');
 
     $bootstrap = new Bootstrap($_GET); // Get all url parameters

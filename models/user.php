@@ -58,7 +58,7 @@ class UserModel extends Model{
 						"email" => $row['email']
 					);
 					Messages::setMsg('You have logged in successfully', 'success');
-					header('Location: ' . ROOT_PATH . 'shares');
+					header('Location: ' . ROOT_PATH);
 					exit(0); // This line solves the issue where $_SESSION['successMsg'] is unset after header redirection
 				} else {
 				    Messages::setMsg('Password is incorrect', 'error');
