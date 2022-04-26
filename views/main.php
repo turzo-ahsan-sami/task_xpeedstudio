@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/toastr.min.css">
 	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/summernote.min.css">
 	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/style.css?ver=1.0">
 
@@ -60,6 +61,7 @@
 
   <script src="<?php echo ROOT_PATH; ?>assets/js/jquery.min.js"></script>
 	<script src="<?php echo ROOT_PATH; ?>assets/js/bootstrap.js"></script>
+	<script src="<?php echo ROOT_PATH; ?>assets/js/toastr.min.js"></script>
 	<script src="<?php echo ROOT_PATH; ?>assets/js/summernote.min.js"></script>
 	<script src="<?php echo ROOT_PATH; ?>assets/js/validator.js"></script>
 
