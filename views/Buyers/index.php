@@ -2,6 +2,7 @@
 
 <div class="col-12">
 	<?php if(isset($_SESSION['is_logged_in'])) : ?>
+		<a class="btn btn-primary btn-share mt-0" href="<?php echo ROOT_PATH; ?>buyers/add">Add New</a>
 		<table class="table">
 			<thead class="thead-light">
 				<tr>
