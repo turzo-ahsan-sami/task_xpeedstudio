@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/bootstrap.css">
-	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/summernote.min">
+	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/summernote.min.css">
 	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/style.css?ver=1.0">
 
 	

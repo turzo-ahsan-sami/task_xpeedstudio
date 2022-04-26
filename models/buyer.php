@@ -2,9 +2,13 @@
 
 class BuyerModel extends Model{
 	public function Index(){
-		$this->query('SELECT * FROM buyers');
-		$rows = $this->resultSet();
-		return $rows;
+		if(isset($_SESSION['is_logged_in'])) {
+			$this->query('SELECT * FROM buyers WHERE entry_by = ' . $_SESSION['user_data']['id']);
+			$rows = $this->resultSet();
+			return $rows;
+		}
+		
+		return;
 	}
 
 	public function add(){

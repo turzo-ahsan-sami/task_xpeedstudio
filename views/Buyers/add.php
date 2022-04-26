@@ -4,18 +4,22 @@
 	</div>
 	<div class="card-body">
 		<form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+			
 			<div class="form-group">
-				<label for="title">Share Title</label>
-				<input type="text" name="title" class="form-control" id="title" required />
+				<label for="title">Amount</label>
+				<input type="number" min="0" class="form-control" id="amount" name="amount" required title="number only" />
 			</div>
+			
 			<div class="form-group">
-				<label for="body">Body</label>
-				<textarea name="body" class="form-control" id="body" required ></textarea>
+				<label for="title">Buyer</label>
+				<input type="text" pattern="^(?=.*[A-Za-z0-9])[A-Za-z0-9 _]*$" maxlength="20" class="form-control" id="buyer" name="buyer" required title="only letters, numbers and spaces, max 20 characters" />
 			</div>
+			
 			<div class="form-group">
-				<label for="link">Link</label>
-				<input type="text" name="link" class="form-control" id="link" placeholder="https://www.google.com" />
+				<label for="title">Receipt ID</label>
+				<input type="text" pattern="/^[A-Za-z]+$/" maxlength="20" class="form-control" id="receipt_id" name="receipt_id" required title="text only"/>
 			</div>
+
 			<input class="btn btn-primary" name="submit" type="submit" value="Submit" />
 			<a class="btn btn-danger" href="<?php echo ROOT_PATH; ?>buyers">Cancel</a>
 		</form>
