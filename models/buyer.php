@@ -10,12 +10,15 @@ class BuyerModel extends Model
 
 			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 			if( !empty($post) ){
-				$this->query('SELECT * FROM buyers WHERE entry_at >= ' . $post['fromDate'] . ' AND entry_at <= ' . $post['toDate']);
+				$this->query("SELECT * FROM buyers WHERE entry_at BETWEEN '" . $post['fromDate'] . "' AND '" . $post['toDate'] . "'");				
+				$rows = $this->resultSet();
+				return $rows;
 			}
-
-            $this->query('SELECT * FROM buyers');
-            $rows = $this->resultSet();
-            return $rows;
+			else {
+				$this->query('SELECT * FROM buyers');
+				$rows = $this->resultSet();
+				return $rows;
+			}
         }
 
         return;
