@@ -25,9 +25,19 @@ class Buyers extends Controller
                     return;
                 }
 
-				$viewmodel = new BuyerModel();
-				$viewmodel->store($post);
+				$buyerModel = new BuyerModel();
+				$res = $buyerModel->store($post);
 
+				if( $res->res == 'success' ) {
+					Messages::setMsg('Added', 'success');
+                    // Redirect
+                    header('Location: ' . ROOT_PATH . 'buyers');					
+                    exit(0);
+				} else {
+					Messages::setMsg($res->msg, 'error');
+                	exit(1);
+				}
+				
             } else {
                 $viewmodel = new BuyerModel();
                 $this->returnView($viewmodel->add(), true);

@@ -37,67 +37,17 @@ class BuyerModel extends Model
 
 			// Verify
 			if ($this->lastInsertId()) {
-				Messages::setMsg('Added', 'success');
-				// Redirect
-				header('Location: ' . ROOT_PATH . 'buyers');					
-				exit(0);
+				return (object) ['res' => 'success', 'msg' => $this->lastInsertId()];
 			}
 		} catch (Exception $e) {
-			Messages::setMsg($e->getMessage(), 'error');
-			exit(1);
+			return (object) ['res' => 'error', 'msg' => $e->getMessage()];                
 		}
 	}
-
+    
 
     public function add()
     {
-        // Sanitize POST
-        $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        if (isset($post['submission'])) {
-
-            // $post['buyer_ip'] = Helpers::getUserIp();
-            // $post['hash_key'] = Helpers::getHashKey($post['receipt_id']);
-
-			var_dump($post);
-
-            if (Helpers::validate($post)) {
-                Messages::setMsg('Please fill in the required fields', 'error');
-                return;
-            }
-
-            try {
-                // Insert into mySQL
-                $this->query('INSERT INTO buyers (amount, buyer, receipt_id, items, buyer_email, buyer_ip, note, city, phone, hash_key, entry_by) VALUES (:amount, :buyer, :receipt_id, :items, :buyer_email, :buyer_ip, :note, :city, :phone, :hash_key, :entry_by)');
-
-                $this->bind(':amount',         $post['amount']);
-                $this->bind(':buyer',         $post['buyer']);
-                $this->bind(':receipt_id',  $post['receipt_id']);
-                $this->bind(':items',         $post['items']);
-                $this->bind(':buyer_email', $post['buyer_email']);
-                $this->bind(':buyer_ip',     $post['buyer_ip']);
-                $this->bind(':note',         $post['note']);
-                $this->bind(':city',         $post['city']);
-                $this->bind(':phone',         $post['phone']);
-                $this->bind(':hash_key',     $post['hash_key']);
-                $this->bind(':entry_by',     $post['entry_by']);
-
-                $this->execute();
-
-                // Verify
-                if ($this->lastInsertId()) {
-                    Messages::setMsg('Added', 'success');
-                    // Redirect
-                    header('Location: ' . ROOT_PATH . 'buyers');					
-                    exit(0);
-                }
-            } catch (Exception $e) {
-                Messages::setMsg($e->getMessage(), 'error');
-                exit(1);
-            }
-        }
-
-        return;
+        
     }
 
     public function edit()
