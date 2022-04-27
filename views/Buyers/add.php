@@ -57,6 +57,7 @@
                 <input value="123123" type="number" min="0" class="form-control" id="entry_by" name="entry_by" required title="number only" />
             </div>
 
+			<input type="hidden" id="username" name="username" value="<?php echo $_SESSION['user_data']['name']; ?>" />
             <input class="btn btn-primary" name="submit" type="submit" value="Submit" id="submitBtn" />
             <a class="btn btn-danger" href="<?php echo ROOT_PATH; ?>buyers">Cancel</a>
         </form>

@@ -69,7 +69,8 @@
                 <input value="<?php echo $viewmodel['entry_by']; ?>" type="number" min="0" class="form-control" id="entry_by" name="entry_by" required title="number only" />
             </div>
 
-            <input type="hidden" name="id" value="<?php echo $viewmodel['id']; ?>" />
+			<input type="hidden" id="username" name="username" value="<?php echo $_SESSION['user_data']['name']; ?>" />
+            <input type="hidden" id="id" name="id" value="<?php echo $viewmodel['id']; ?>" />
             <input class="btn btn-primary" name="submit" type="submit" value="Update" id="updateBtn" />
 
             <a class="btn btn-danger" href="<?php echo ROOT_PATH; ?>buyers">Cancel</a>

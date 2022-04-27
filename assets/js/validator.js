@@ -5,6 +5,7 @@ $(document).ready(function () {
 $("#submitBtn").click((e) => {
 
     e.preventDefault();
+    $(this).prop("disabled", true)
 
     if (!validateAmount()) {
         showMessage('Invalid amount', 'error')
@@ -51,34 +52,50 @@ $("#submitBtn").click((e) => {
         return
     }
 
-    let amount      = $("#amount").val()
-    let buyer       = $("#buyer").val()
-    let receipt_id  = $("#receipt_id").val()
+    let amount = $("#amount").val()
+    let buyer = $("#buyer").val()
+    let receipt_id = $("#receipt_id").val()
     let buyer_email = $("#buyer_email").val()
-    let items       = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
-    let note        = $("#note").val()
-    let city        = $("#city").val()
-    let phone       = $("#phone").val()
-    let entry_by    = $("#entry_by").val()
-    let submission  = true
+    let items = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
+    let note = $("#note").val()
+    let city = $("#city").val()
+    let phone = $("#phone").val()
+    let entry_by = $("#entry_by").val()
+    let submission = true
 
     let formData = { amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by, submission }
-    
+
     let url = location.href
-    
-    $.ajax({
-        type: "POST",
-        data: formData,
-        url: url,
-        success: function (data) {
-            alert(data)
-        }
-    });
+
+    let username = $("#username").val()
+    if (!validateCookie(username)) {
+        showMessage('Already submitted, please wait 24 hours', 'error')
+        setTimeout(() => {
+            location.href = './'
+            return
+        }, 500);
+    } else {
+        $.ajax({
+            type: "POST",
+            data: formData,
+            url: url,
+            success: function (data) {
+                showMessage('Success', 'success')
+                setCookie("username", username, 1)
+                setTimeout(() => {
+                    $(this).prop("disabled", false)
+                    location.href = './'
+                }, 500);
+            }
+        });
+    }
+
 });
 
 $("#updateBtn").click((e) => {
 
     e.preventDefault();
+    $(this).prop("disabled", true)
 
     if (!validateAmount()) {
         showMessage('Invalid amount', 'error')
@@ -125,28 +142,32 @@ $("#updateBtn").click((e) => {
         return
     }
 
-    let id          = $("#id").val()
-    let amount      = $("#amount").val()
-    let buyer       = $("#buyer").val()
-    let receipt_id  = $("#receipt_id").val()
+    let id = $("#id").val()
+    let amount = $("#amount").val()
+    let buyer = $("#buyer").val()
+    let receipt_id = $("#receipt_id").val()
     let buyer_email = $("#buyer_email").val()
-    let items       = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
-    let note        = $("#note").val()
-    let city        = $("#city").val()
-    let phone       = $("#phone").val()
-    let entry_by    = $("#entry_by").val()
-    let submission  = true
+    let items = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
+    let note = $("#note").val()
+    let city = $("#city").val()
+    let phone = $("#phone").val()
+    let entry_by = $("#entry_by").val()
+    let submission = true
 
     let formData = { id, amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by, submission }
-    
+
     let url = location.href
-    
+
     $.ajax({
         type: "POST",
         data: formData,
         url: url,
         success: function (data) {
-            alert(data)
+            showMessage('Success', 'success')
+            setTimeout(() => {
+                $(this).prop("disabled", false)
+                location.href = './'
+            }, 500);
         }
     });
 });
@@ -214,7 +235,7 @@ function validatePhone() {
     let regex = '^[0-9]*$'
     let val = $("#phone").val()
 
-    if(val.slice(0, 3) != '880') val = `880${val}`;
+    if (val.slice(0, 3) != '880') val = `880${val}`;
 
     let match = val.match(regex)
     if (match == null) return false
@@ -259,4 +280,34 @@ function showMessage(msg = "", type = "") {
     if (type == 'error') toastr.error(msg)
     else if (type == 'warning') toastr.warning(msg)
     else toastr.success(msg)
+}
+
+function validateCookie(username) {
+    let usernameFromCookie = getCookie("username");
+    console.log(username, usernameFromCookie)
+    if (usernameFromCookie != username) return false;
+    return true;
+}
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }

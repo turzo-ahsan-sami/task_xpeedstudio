@@ -6,11 +6,11 @@
 		<form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input type="email" name="email" class="form-control" id="email" required />
+				<input type="email" name="email" class="form-control" id="email" placeholder="admin@admin.com" required />
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>
-				<input type="password" name="password" class="form-control" id="password" required />
+				<input type="password" name="password" class="form-control" id="password" placeholder="123456" required />
 			</div>
 			<input class="btn btn-primary" name="submit" type="submit" value="Login" />
 			<a class="btn btn-danger" href="<?php echo ROOT_PATH; ?>">Cancel</a>
