@@ -14,8 +14,10 @@ abstract class Controller{
 		return $this->{$this->action}();
 	}
 
-	protected function returnView($viewmodel, $fullview){
-		$view = 'views/' . get_class($this) . '/' . $this->action . '.php';
+	protected function returnView($viewmodel, $fullview, $action = ""){		
+		$view = 'views/' . get_class($this) . '/' . $this->action . '.php';		
+
+		if($action) $view = 'views/' . get_class($this) . '/' . $action . '.php';	
 
 		if($fullview){
 			require('views/main.php');
