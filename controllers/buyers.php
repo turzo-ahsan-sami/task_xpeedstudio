@@ -4,8 +4,14 @@ class Buyers extends Controller
 {
     protected function Index()
     {		
-        $viewmodel = new BuyerModel();
-        $this->returnView($viewmodel->Index(), true);
+		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+		if( !empty($post) ) {
+			$viewmodel = new BuyerModel();
+			$this->returnView($viewmodel->Filter(), true);
+		} else {
+			$viewmodel = new BuyerModel();
+			$this->returnView($viewmodel->Index(), true);
+		}
     }
 
     protected function add()

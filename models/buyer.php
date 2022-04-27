@@ -6,19 +6,34 @@ class BuyerModel extends Model
     public function Index()
     {
         if (isset($_SESSION['is_logged_in'])) {
-            // $this->query('SELECT * FROM buyers WHERE entry_by = ' . $_SESSION['user_data']['id']);
 
-			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-			if( !empty($post) ){
-				$this->query("SELECT * FROM buyers WHERE entry_at BETWEEN '" . $post['fromDate'] . "' AND '" . $post['toDate'] . "'");				
-				$rows = $this->resultSet();
-				return $rows;
-			}
-			else {
-				$this->query('SELECT * FROM buyers');
-				$rows = $this->resultSet();
-				return $rows;
-			}
+			// $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+			// if( !empty($post) ){
+			// 	$this->query("SELECT * FROM buyers WHERE entry_at BETWEEN '" . $post['fromDate'] . "' AND '" . $post['toDate'] . "'");				
+			// 	$rows = $this->resultSet();
+			// 	return $rows;
+			// }
+			// else {
+			// 	$this->query('SELECT * FROM buyers');
+			// 	$rows = $this->resultSet();
+			// 	return $rows;
+			// }
+
+			$this->query('SELECT * FROM buyers');
+			$rows = $this->resultSet();
+			return $rows;
+        }
+
+        return;
+    }
+    
+	public function Filter()
+    {
+        if (isset($_SESSION['is_logged_in'])) {
+			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);			
+			$this->query("SELECT * FROM buyers WHERE entry_at BETWEEN '" . $post['fromDate'] . "' AND '" . $post['toDate'] . "'");				
+			$rows = $this->resultSet();
+			return $rows;			
         }
 
         return;
