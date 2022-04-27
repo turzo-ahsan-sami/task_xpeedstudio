@@ -20,48 +20,57 @@ class BuyerModel extends Model{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		
 		if(isset($post['submission'])){
-			$post['buyer_ip'] = $this->getUserIp();
-			var_dump($post['submission'], $post['buyer_ip']);
-			var_dump($post);
-			if(
-				$post['amount'] == '' 
-				|| $post['buyer'] == ''
-				|| $post['receipt_id'] == ''
-				|| $post['items'] == ''
-				|| $post['buyer_email'] == ''
-				|| $post['buyer_ip'] == ''
-				|| $post['note'] == ''
-				|| $post['city'] == ''
-				|| $post['phone'] == ''
-				|| $post['hash_key'] == ''
-				|| $post['entry_by'] == ''
-			){
+			Messages::setMsg('data received', 'success');
+			$post['buyer_ip'] = Helpers::getUserIp();
+			$post['hash_key'] = Helpers::getHashKey($post['receipt_id']);			
+			if( Helpers::validate($post) ) {
 				Messages::setMsg('Please fill in the required fields', 'error');
 				return;
 			}
-			// Insert into mySQL
-			$this->query('INSERT INTO buyers (amount, buyer, receipt_id, items, buyer_email, buyer_ip, note, city, phone, hash_key, entry_by) VALUES (:amount, :buyer, :receipt_id, :items, :buyer_email, :buyer_ip, :note, :city, :phone, :hash_key, :entry_by)');
-			
-			$this->bind(':amount', 		$post['amount']);
-			$this->bind(':buyer', 		$post['buyer']);
-			$this->bind(':receipt_id',  $post['receipt_id']);
-			$this->bind(':items', 		$post['items']);
-			$this->bind(':buyer_email', $post['buyer_email']);
-			$this->bind(':buyer_ip', 	$post['buyer_ip']);
-			$this->bind(':note', 		$post['note']);
-			$this->bind(':city', 		$post['city']);
-			$this->bind(':phone', 		$post['phone']);
-			$this->bind(':hash_key', 	$post['hash_key']);
-			$this->bind(':entry_by', 	$post['entry_by']);			
-			
-			$this->execute();
+			// if(
+			// 	$post['amount'] == '' 
+			// 	|| $post['buyer'] == ''
+			// 	|| $post['receipt_id'] == ''
+			// 	|| $post['items'] == ''
+			// 	|| $post['buyer_email'] == ''
+			// 	|| $post['buyer_ip'] == ''
+			// 	|| $post['note'] == ''
+			// 	|| $post['city'] == ''
+			// 	|| $post['phone'] == ''
+			// 	|| $post['hash_key'] == ''
+			// 	|| $post['entry_by'] == ''
+			// ){
+			// 	Messages::setMsg('Please fill in the required fields', 'error');
+			// 	return;
+			// }
 
-			// Verify
-			if($this->lastInsertId()){
-				Messages::setMsg('Added', 'success');
-				// Redirect
-				header('Location: ' . ROOT_PATH . 'buyers');
-				exit(0);
+			try{
+				// Insert into mySQL
+				$this->query('INSERT INTO buyers (amount, buyer, receipt_id, items, buyer_email, buyer_ip, note, city, phone, hash_key, entry_by) VALUES (:amount, :buyer, :receipt_id, :items, :buyer_email, :buyer_ip, :note, :city, :phone, :hash_key, :entry_by)');
+				
+				$this->bind(':amount', 		$post['amount']);
+				$this->bind(':buyer', 		$post['buyer']);
+				$this->bind(':receipt_id',  $post['receipt_id']);
+				$this->bind(':items', 		$post['items']);
+				$this->bind(':buyer_email', $post['buyer_email']);
+				$this->bind(':buyer_ip', 	$post['buyer_ip']);
+				$this->bind(':note', 		$post['note']);
+				$this->bind(':city', 		$post['city']);
+				$this->bind(':phone', 		$post['phone']);
+				$this->bind(':hash_key', 	$post['hash_key']);
+				$this->bind(':entry_by', 	$post['entry_by']);			
+				
+				$this->execute();
+	
+				// Verify
+				if($this->lastInsertId()){
+					Messages::setMsg('Added', 'success');
+					// Redirect
+					header('Location: ' . ROOT_PATH . 'buyers');
+					exit(0);
+				}
+			} catch(Exception $e) {
+				echo $e->getMessage();
 			}
 		}
 
