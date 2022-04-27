@@ -2,8 +2,7 @@
     <div class="card-header">
         <h3 class="card-title">Add New</h3>
     </div>
-    <div class="card-body">
-        <!-- <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>"> -->
+    <div class="card-body">        
         <form method="" action="">
 
             <div class="form-group">

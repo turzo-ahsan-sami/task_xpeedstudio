@@ -51,25 +51,21 @@ $("#submitBtn").click((e) => {
         return
     }
 
-    let amount = $("#amount").val()
-    let buyer = $("#buyer").val()
-    let receipt_id = $("#receipt_id").val()
+    let amount      = $("#amount").val()
+    let buyer       = $("#buyer").val()
+    let receipt_id  = $("#receipt_id").val()
     let buyer_email = $("#buyer_email").val()
-    let items = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
-    let note = $("#note").val()
-    let city = $("#city").val()
-    let phone = $("#phone").val()
-    let entry_by = $("#entry_by").val()
-    let submission = true
+    let items       = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
+    let note        = $("#note").val()
+    let city        = $("#city").val()
+    let phone       = $("#phone").val()
+    let entry_by    = $("#entry_by").val()
+    let submission  = true
 
     let formData = { amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by, submission }
-    // let data =  $('form').serialize()
-    // console.log( formData, data )
-
+    
     let url = location.href
-    // url = <?php echo $_SERVER['PHP_SELF']; ?>
-    // return 
-
+    
     $.ajax({
         type: "POST",
         data: formData,
@@ -80,8 +76,79 @@ $("#submitBtn").click((e) => {
     });
 });
 
-$("#phone").focusout(function () {
-    $(this).val(`880${$(this).val()}`)
+$("#updateBtn").click((e) => {
+
+    e.preventDefault();
+
+    if (!validateAmount()) {
+        showMessage('Invalid amount', 'error')
+        return
+    }
+
+    if (!validateBuyer()) {
+        showMessage('Invalid buyer input', 'error')
+        return
+    }
+
+    if (!validateReceiptId()) {
+        showMessage('Invalid receipt Id', 'error')
+        return
+    }
+
+    if (!validateEmail()) {
+        showMessage('Invalid email', 'error')
+        return
+    }
+
+    if (!validateItems()) {
+        showMessage('Please select an item', 'error')
+        return
+    }
+
+    if (!validateNote()) {
+        showMessage('Invalid note', 'error')
+        return
+    }
+
+    if (!validateCity()) {
+        showMessage('Invalid city', 'error')
+        return
+    }
+
+    if (!validatePhone()) {
+        showMessage('Invalid phone', 'error')
+        return
+    }
+
+    if (!validateEntryBy()) {
+        showMessage('Invalid entry by', 'error')
+        return
+    }
+
+    let id          = $("#id").val()
+    let amount      = $("#amount").val()
+    let buyer       = $("#buyer").val()
+    let receipt_id  = $("#receipt_id").val()
+    let buyer_email = $("#buyer_email").val()
+    let items       = JSON.stringify($('#items option:selected').toArray().map(item => item.value))
+    let note        = $("#note").val()
+    let city        = $("#city").val()
+    let phone       = $("#phone").val()
+    let entry_by    = $("#entry_by").val()
+    let submission  = true
+
+    let formData = { id, amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by, submission }
+    
+    let url = location.href
+    
+    $.ajax({
+        type: "POST",
+        data: formData,
+        url: url,
+        success: function (data) {
+            alert(data)
+        }
+    });
 });
 
 
@@ -146,6 +213,9 @@ function validateCity() {
 function validatePhone() {
     let regex = '^[0-9]*$'
     let val = $("#phone").val()
+
+    if(val.slice(0, 3) != '880') val = `880${val}`;
+
     let match = val.match(regex)
     if (match == null) return false
     return true

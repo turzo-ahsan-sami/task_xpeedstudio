@@ -77,18 +77,18 @@ class BuyerModel extends Model
             }
             $this->query('UPDATE buyers SET amount = :amount, buyer = :buyer, receipt_id = :receipt_id, items = :items, buyer_email = :buyer_email, buyer_ip = :buyer_ip, note = :note, city = :city, phone = :phone, hash_key = :hash_key, entry_by = :entry_by, WHERE id = :id');
 
-            $this->bind(':amount',         $post['amount']);
-            $this->bind(':buyer',         $post['buyer']);
+            $this->bind(':amount',      $post['amount']);
+            $this->bind(':buyer',       $post['buyer']);
             $this->bind(':receipt_id',  $post['receipt_id']);
-            $this->bind(':items',         $post['items']);
+            $this->bind(':items',       $post['items']);
             $this->bind(':buyer_email', $post['buyer_email']);
-            $this->bind(':buyer_ip',     $post['buyer_ip']);
-            $this->bind(':note',         $post['note']);
-            $this->bind(':city',         $post['city']);
-            $this->bind(':phone',         $post['phone']);
-            $this->bind(':hash_key',     $post['hash_key']);
-            $this->bind(':entry_by',     $post['entry_by']);
-            $this->bind(':id',             $post['id']);
+            $this->bind(':buyer_ip',    $post['buyer_ip']);
+            $this->bind(':note',        $post['note']);
+            $this->bind(':city',        $post['city']);
+            $this->bind(':phone',       $post['phone']);
+            $this->bind(':hash_key',    $post['hash_key']);
+            $this->bind(':entry_by',    $post['entry_by']);
+            $this->bind(':id',          $post['id']);
 
             $this->execute();
 
