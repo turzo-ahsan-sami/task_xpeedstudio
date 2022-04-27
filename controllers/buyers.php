@@ -7,7 +7,7 @@ class Buyers extends Controller
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		if( !empty($post) ) {
 			$viewmodel = new BuyerModel();
-			$this->returnView($viewmodel->Filter(), false, 'filter');
+			$this->returnView($viewmodel->Filter(), false);
 		} else {
 			$viewmodel = new BuyerModel();
 			$this->returnView($viewmodel->Index(), true);

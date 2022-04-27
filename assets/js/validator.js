@@ -167,8 +167,10 @@ $("#updateBtn").click((e) => {
     });
 });
 
-$("#filterBtn").click((e) => {
-    e.preventDefault();
+// $("#filterBtn").click((e) => {
+
+$("#buyerReport").on('click', '#filterBtn', function() {
+    // e.preventDefault();
     let fromDate = $("#fromDatePicker").val()
     let toDate   = $("#toDatePicker").val()
     
@@ -191,12 +193,16 @@ $("#filterBtn").click((e) => {
 
     let url = location.href
 
+    console.log( fromDate, toDate, url )
+
     $.ajax({
         type: "POST",
         data: formData,
         url: url,
         success: function (data) {
-            // showMessage('Success', 'success')           
+            console.log( data )
+            $("#buyerReport").empty()
+            $("#buyerReport").html( data )
         }
     });
 
@@ -320,8 +326,7 @@ function showMessage(msg = "", type = "") {
 
 function validateCookie(username) {
     let usernameFromCookie = getCookie("username");
-    console.log(username, usernameFromCookie)
-    if (usernameFromCookie != username) return false;
+    if (usernameFromCookie == username) return false;
     return true;
 }
 

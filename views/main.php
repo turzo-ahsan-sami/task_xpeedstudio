@@ -55,7 +55,9 @@
 
         <div class="row">
             <?php Messages::display(); ?>
-            <?php require($view); ?>
+            <section id="buyerReport">
+                <?php require($view); ?>
+            </section>
         </div>
 
     </main><!-- /.container -->
