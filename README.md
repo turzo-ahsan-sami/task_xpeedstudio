@@ -11,4 +11,4 @@ Rename *env.example.php* to *env.php* and add database credentials
 
 ### Database tables
 
-Database file : *task_xpeedstudio_turzo.sql*
+Database file : *database.sql*

@@ -1,0 +1,6 @@
+1. Create a database
+2. Import file `database.sql` in your database
+3. copy the project files in your server (for example htdocs folder in of xampp)
+4. rename `env.example.php` to `env.php`
+5. enter your database credentials such as, host, port, username, password, database name and dns string in `env.php` variables
+6. visit 127.0.0.1/[project_folder_name] to run the project 
