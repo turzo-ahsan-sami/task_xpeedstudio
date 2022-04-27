@@ -1,6 +1,7 @@
 <?php
 
 class BuyerModel extends Model{
+	
 	public function Index(){
 		if(isset($_SESSION['is_logged_in'])) {
 			// $this->query('SELECT * FROM buyers WHERE entry_by = ' . $_SESSION['user_data']['id']);
