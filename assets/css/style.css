@@ -9,3 +9,11 @@
 code {
 	white-space: pre-wrap;
 }
+
+.justify_space_between {
+	justify-content: space-between !important;
+}
+
+.mt_2em {
+	margin-top: 2rem !important;
+}

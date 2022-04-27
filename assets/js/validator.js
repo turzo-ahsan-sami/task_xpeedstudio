@@ -1,7 +1,3 @@
-$(document).ready(function () {
-
-});
-
 $("#submitBtn").click((e) => {
 
     e.preventDefault();
@@ -171,6 +167,36 @@ $("#updateBtn").click((e) => {
     });
 });
 
+$("#filterBtn").click((e) => {
+    e.preventDefault();
+    let fromDate = $("#fromDatePicker").val()
+    let toDate   = $("#toDatePicker").val()
+    
+    if( !isNullOrEmpty(fromDate) ){
+        showMessage('Empty date', 'error')
+        return
+    }
+    
+    if( !isNullOrEmpty(toDate) ){
+        showMessage('Empty date', 'error')
+        return
+    }
+    
+    if(fromDate > toDate) {
+        showMessage('Invalid date', 'error')
+        return
+    }
+
+    console.log(fromDate, toDate)
+
+});
+
+function isNullOrEmpty(input){
+    if(input == null) return false
+    if(input == undefined) return false
+    if(input == '') return false
+    return true
+}
 
 function validateAmount() {
     let regex = '^[0-9]*$'

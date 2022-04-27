@@ -65,8 +65,7 @@
     <script src="<?php echo ROOT_PATH; ?>assets/js/toastr.min.js"></script>
     <script src="<?php echo ROOT_PATH; ?>assets/js/summernote.min.js"></script>
     <script src="<?php echo ROOT_PATH; ?>assets/js/validator.js"></script>
-
-
+                  
 </body>
 
 </html> 
