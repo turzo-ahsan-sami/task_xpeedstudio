@@ -93,7 +93,7 @@ $("#submitBtn").click((e) => {
 });
 
 $("#updateBtn").click((e) => {
-
+    
     e.preventDefault();
     $(this).prop("disabled", true)
 
