@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('#summernote').summernote();
-  });
+    
+});
 
 $("#submitBtn").click( (e) => {
 
@@ -60,16 +60,23 @@ $("#submitBtn").click( (e) => {
     let city        = $("#city").val()
     let phone       = $("#phone").val()
     let entry_by    = $("#entry_by").val()
+    let submission  = true
 
-    let formData = { amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by }
-    
+    let formData = { amount, buyer, receipt_id, buyer_email, items, note, city, phone, entry_by, submission }
+    // let data =  $('form').serialize()
+    // console.log( formData, data )
+
+    let url = location.href
+    // url = <?php echo $_SERVER['PHP_SELF']; ?>
+    // return 
+
     $.ajax({
-        url: `${location.href}`,
+        type: "POST",
         data: formData,
-        processData: false,
-        type: 'POST',
-        success: function ( data ) {
-            alert( data );
+        url: url,
+        success: function(data)
+        {
+          alert(data)
         }
     });
 });

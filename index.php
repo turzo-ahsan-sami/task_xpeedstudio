@@ -5,6 +5,7 @@
     // Include Config
     require('config.php');
 
+    require('classes/helpers.php');
     require('classes/messages.php');
     require('classes/bootstrap.php');
     require('classes/controller.php');

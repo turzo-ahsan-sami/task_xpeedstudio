@@ -1,7 +1,7 @@
 <?php
 
 class BuyerModel extends Model{
-	
+
 	public function Index(){
 		if(isset($_SESSION['is_logged_in'])) {
 			// $this->query('SELECT * FROM buyers WHERE entry_by = ' . $_SESSION['user_data']['id']);
@@ -13,11 +13,16 @@ class BuyerModel extends Model{
 		return;
 	}
 
+	
+
 	public function add(){
 		// Sanitize POST
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-		if(isset($post['submit'])){
+		
+		if(isset($post['submission'])){
+			$post['buyer_ip'] = $this->getUserIp();
+			var_dump($post['submission'], $post['buyer_ip']);
+			var_dump($post);
 			if(
 				$post['amount'] == '' 
 				|| $post['buyer'] == ''
