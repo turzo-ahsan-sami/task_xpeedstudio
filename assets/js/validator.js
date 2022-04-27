@@ -130,6 +130,7 @@ function validateNote(){
     let regex = /^[a-zA-Z\s]*$/    
     let val = $("#note").val()
     let match = val.match(regex)
+    if( val == '' ) return false
     if(match == null) return false
     if(countWords(val) > 30) return false
     return true

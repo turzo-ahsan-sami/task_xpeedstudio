@@ -22,17 +22,17 @@ class Helpers{
 	}
 
     public static function validate($post){
-        if( empty( $post['amount'] ) ) return true;
-        if( empty( $post['buyer'] ) ) return true;
-        if( empty( $post['receipt_id'] ) ) return true;
-        if( empty( $post['items'] ) ) return true;
-        if( empty( $post['buyer_email'] ) ) return true;
-        if( empty( $post['buyer_ip'] ) ) return true;
-        if( empty( $post['note'] ) ) return true;
-        if( empty( $post['city'] ) ) return true;
-        if( empty( $post['phone'] ) ) return true;
-        if( empty( $post['hash_key'] ) ) return true;
-        if( empty( $post['entry_by'] ) ) return true;        
+        if( empty( $post['amount'])      || $post['amount']      == '' ) return true;
+        if( empty( $post['buyer'])       || $post['buyer']       == '' ) return true;
+        if( empty( $post['receipt_id'])  || $post['receipt_id']  == '' ) return true;
+        if( empty( $post['items'])       || $post['items']       == '' ) return true;
+        if( empty( $post['buyer_email']) || $post['buyer_email'] == '' ) return true;
+        if( empty( $post['buyer_ip'])    || $post['buyer_ip']    == '' ) return true;
+        if( empty( $post['note'])        || $post['note']        == '' ) return true;
+        if( empty( $post['city'])        || $post['city']        == '' ) return true;
+        if( empty( $post['phone'])       || $post['phone']       == '' ) return true;
+        if( empty( $post['hash_key'])    || $post['hash_key']    == '' ) return true;
+        if( empty( $post['entry_by'])    || $post['entry_by']    == '' ) return true;        
         return false;
     }
 

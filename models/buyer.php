@@ -15,35 +15,20 @@ class BuyerModel extends Model{
 
 	
 
-	public function add(){
+	public function add(){		
 		// Sanitize POST
-		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);		
 		
 		if(isset($post['submission'])){
-			Messages::setMsg('data received', 'success');
+			
 			$post['buyer_ip'] = Helpers::getUserIp();
-			$post['hash_key'] = Helpers::getHashKey($post['receipt_id']);			
+			$post['hash_key'] = Helpers::getHashKey($post['receipt_id']);	
+			
 			if( Helpers::validate($post) ) {
 				Messages::setMsg('Please fill in the required fields', 'error');
 				return;
 			}
-			// if(
-			// 	$post['amount'] == '' 
-			// 	|| $post['buyer'] == ''
-			// 	|| $post['receipt_id'] == ''
-			// 	|| $post['items'] == ''
-			// 	|| $post['buyer_email'] == ''
-			// 	|| $post['buyer_ip'] == ''
-			// 	|| $post['note'] == ''
-			// 	|| $post['city'] == ''
-			// 	|| $post['phone'] == ''
-			// 	|| $post['hash_key'] == ''
-			// 	|| $post['entry_by'] == ''
-			// ){
-			// 	Messages::setMsg('Please fill in the required fields', 'error');
-			// 	return;
-			// }
-
+			
 			try{
 				// Insert into mySQL
 				$this->query('INSERT INTO buyers (amount, buyer, receipt_id, items, buyer_email, buyer_ip, note, city, phone, hash_key, entry_by) VALUES (:amount, :buyer, :receipt_id, :items, :buyer_email, :buyer_ip, :note, :city, :phone, :hash_key, :entry_by)');
@@ -66,11 +51,12 @@ class BuyerModel extends Model{
 				if($this->lastInsertId()){
 					Messages::setMsg('Added', 'success');
 					// Redirect
-					header('Location: ' . ROOT_PATH . 'buyers');
+					// header('Location: ' . ROOT_PATH . 'buyers');					
 					exit(0);
 				}
 			} catch(Exception $e) {
-				echo $e->getMessage();
+				Messages::setMsg($e->getMessage(), 'error');
+				exit(1);
 			}
 		}
 
