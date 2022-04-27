@@ -187,7 +187,18 @@ $("#filterBtn").click((e) => {
         return
     }
 
-    console.log(fromDate, toDate)
+    let formData = { fromDate, toDate }
+
+    let url = location.href
+
+    $.ajax({
+        type: "POST",
+        data: formData,
+        url: url,
+        success: function (data) {
+            // showMessage('Success', 'success')           
+        }
+    });
 
 });
 

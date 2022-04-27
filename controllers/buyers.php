@@ -3,7 +3,7 @@
 class Buyers extends Controller
 {
     protected function Index()
-    {
+    {		
         $viewmodel = new BuyerModel();
         $this->returnView($viewmodel->Index(), true);
     }
