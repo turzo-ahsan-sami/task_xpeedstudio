@@ -89,7 +89,6 @@ $("#submitBtn").click((e) => {
             }
         });
     }
-
 });
 
 $("#updateBtn").click((e) => {
